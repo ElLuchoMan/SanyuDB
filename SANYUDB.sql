@@ -106,3 +106,78 @@ CREATE TABLE "TURNO_CONTRATISTA" (
 	-- Documento del contratista
 	"K_IDTURNO" NUMBER(10) NOT NULL -- Turno a laborar
 );
+
+/* Commentarios */
+COMMENT ON TABLE "COMPANIA" IS 'Entidad encargada de almacenar los datos de la compañia';
+
+COMMENT ON COLUMN "COMPANIA"."K_NITCOMPANIA" IS 'NIT de la compania';
+
+COMMENT ON COLUMN "COMPANIA"."N_RAZONSOCIAL" IS 'Razon social de la compania';
+
+COMMENT ON COLUMN "COMPANIA"."O_TELEFONO" IS 'Telefono de la compania';
+
+COMMENT ON COLUMN "COMPANIA"."O_DIRECCION" IS 'Direccion de la compania';
+
+COMMENT ON TABLE "CONTRATISTA" IS 'Enitdad encargada de almacenar los datos de los contratistas';
+
+COMMENT ON COLUMN "CONTRATISTA"."K_DOCUMENTO" IS 'Identificador unico del contratista';
+
+COMMENT ON COLUMN "CONTRATISTA"."S_PASSWORD" IS 'Password de acceso al sistema';
+
+COMMENT ON COLUMN "CONTRATISTA"."N_NOMBRECONTRATISTA" IS 'Nombre del contratista';
+
+COMMENT ON COLUMN "CONTRATISTA"."O_TELEFONO" IS 'Telefono del contratista';
+
+COMMENT ON COLUMN "CONTRATISTA"."O_ESTADOCONTRATISTA" IS 'Estado del contratista dentro de SANYU (Activo - Inactivo)';
+
+COMMENT ON COLUMN "CONTRATISTA"."K_IDROL" IS 'Rol del contratista';
+
+COMMENT ON TABLE "JORNADA" IS 'Entidad encargada de almacenar las jornada de trabajo';
+
+COMMENT ON COLUMN "JORNADA"."K_IDJORNADA" IS 'Identificador unico de la jornada';
+
+COMMENT ON COLUMN "JORNADA"."N_NOMBREJORNADA" IS 'Nombre de la jornada';
+
+COMMENT ON COLUMN "JORNADA"."O_ESTADOJORNADA" IS 'Estado de la jornada (Activo - Inactivo)';
+
+COMMENT ON TABLE "ROL" IS 'Entidad encargada de almacenar los roles de los usuarios';
+
+COMMENT ON COLUMN "ROL"."K_IDROL" IS 'Identificador unico del rol';
+
+COMMENT ON COLUMN "ROL"."N_NOMBREROL" IS 'Nombre del rol';
+
+COMMENT ON COLUMN "ROL"."O_ESTADOROL" IS 'Estado del rol (Activo - Inactivo)';
+
+COMMENT ON TABLE "TURNO" IS 'Entidad encargada de almacenar los turnos de los usuarios';
+
+COMMENT ON COLUMN "TURNO"."K_IDTURNO" IS 'Identificador unico del turno';
+
+COMMENT ON COLUMN "TURNO"."H_HORAINICIO" IS 'Hora de inicio del turno de trabajo';
+
+COMMENT ON COLUMN "TURNO"."H_HORAFIN" IS 'Hora final del turno de trabajo';
+
+COMMENT ON COLUMN "TURNO"."O_LABOR" IS 'Labor a desempenar durante el turno';
+
+COMMENT ON COLUMN "TURNO"."F_FECHAINICIO" IS 'Fecha de inicio de los turnos del contratista';
+
+COMMENT ON COLUMN "TURNO"."F_FECHAFIN" IS 'Fecha final de los turnos del contratista';
+
+COMMENT ON COLUMN "TURNO"."K_IDJORNADA" IS 'Jornada en que se desarrolla el turno';
+
+COMMENT ON COLUMN "TURNO"."O_USUARIOMODIFICADOR" IS 'Usuario que modifica los turnos del contratista';
+
+COMMENT ON COLUMN "TURNO"."F_FECHAMODIFICACION" IS 'Fecha en que se realiza la modificacion del turno';
+
+COMMENT ON COLUMN "TURNO"."O_RAZONMODIFICACION" IS 'Razon que lleva a la ampliacion del turno';
+
+COMMENT ON COLUMN "TURNO"."H_INICIOTURNO" IS 'Hora en que el contratista indica que inicia el turno de trabajo';
+
+COMMENT ON COLUMN "TURNO"."H_FINTURNO" IS 'Hora en la que el contratista indica que finaliza su turno de trabajo';
+
+COMMENT ON COLUMN "TURNO"."O_ESTADO" IS 'Estado del turno (Activo - Inactivo)';
+
+COMMENT ON TABLE "TURNO_CONTRATISTA" IS 'Entidad encargada de almacenar los turnos de los contratistas';
+
+COMMENT ON COLUMN "TURNO_CONTRATISTA"."K_DOCUMENTO" IS 'Documento del contratista';
+
+COMMENT ON COLUMN "TURNO_CONTRATISTA"."K_IDTURNO" IS 'Turno a laborar';
