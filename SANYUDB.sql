@@ -7,6 +7,8 @@
  ─ H : Identifica las horas
  ─ O : Identifica otros tipos de dato
  */
+
+ /*Eliminación de las tablas (Si exiten previamente)*/
 begin EXECUTE IMMEDIATE 'DROP TABLE   "COMPANIA" CASCADE CONSTRAINTS';
 EXCEPTION WHEN OTHERS THEN NULL;
 end;
@@ -92,7 +94,7 @@ CREATE TABLE "TURNO" (
 	-- Usuario que modifica los turnos del contratista
 	"F_FECHAMODIFICACION" DATE NULL,
 	-- Fecha en que se realiza la modificacion del turno
-	"O_RAZONMODIFICACION" VARCHAR2(50) NULL,
+	"O_RAZONMODIFICACION" VARCHAR2(500) NULL,
 	-- Razon que lleva a la ampliacion del turno
 	"H_INICIOTURNO" VARCHAR2(50) NULL,
 	-- Hora en que el contratista indica que inicia el turno de trabajo
@@ -260,27 +262,27 @@ ADD
 	CONSTRAINT "FK_TURNO_CONTRATISTA" FOREIGN KEY ("K_IDTURNO") REFERENCES "TURNO" ("K_IDTURNO");
 
 /* Secuencias */
-CREATE SEQUENCE TURNO_SEQ INCREMENT BY 1 START WITH 1;
+CREATE SEQUENCE TURNO_SEQ INCREMENT BY 1 START WITH 7; -- Se crea la secuencia de turno para que inicie en 1 y aumente de a 1 valor
 /*Funciones PLSQL*/
 /
 CREATE OR REPLACE NONEDITIONABLE FUNCTION AsignarTurno(
-DocumentoContratista contratista.k_documento%TYPE,
-Turno turno.k_idturno%TYPE
+DocumentoContratista contratista.k_documento%TYPE, --Se toma el tipo de dato del documento del contratista
+Turno turno.k_idturno%TYPE --Se toma el tipo de dato del ID del turno
 )
-RETURN INT
+RETURN INT --Se retorna un entero
 AS
-PRAGMA AUTONOMOUS_TRANSACTION;
-ExisteContratista INTEGER;
+PRAGMA AUTONOMOUS_TRANSACTION; --Se permite la ejecución de operaciones SQL
+ExisteContratista INTEGER; --Se define la variable ExisteContratista como Entero
 BEGIN 
-SELECT COUNT(*) INTO ExisteContratista FROM contratista WHERE DocumentoContratista=contratista.k_documento;
- DBMS_OUTPUT.PUT_LINE(ExisteContratista);
-IF ExisteContratista>0 THEN
+SELECT COUNT(*) INTO ExisteContratista FROM contratista WHERE DocumentoContratista=contratista.k_documento; --Se busca el contratista dentro de la tabla de contratistas
+ DBMS_OUTPUT.PUT_LINE(ExisteContratista);--Se muestra si existe 1 o si no existe 0
+IF ExisteContratista>0 THEN --Si existe el contratista, se ingresa el ID del turno y el documento del contratista, en la tabla de rompimiento
 		INSERT INTO turno_contratista VALUES (DocumentoContratista, Turno);
         COMMIT;
         RETURN 1;
 ELSE 
- DBMS_OUTPUT.PUT('El contratista no existe');
+ DBMS_OUTPUT.PUT('El contratista no existe'); --Si el contratista no existe, se muestra un mensaje
  COMMIT;
- RETURN 0;
+ RETURN 0;--Se retorna el valor 0 si no existe el contratista
 END IF;
 END;
